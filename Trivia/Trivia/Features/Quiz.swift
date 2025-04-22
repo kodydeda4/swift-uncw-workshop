@@ -36,6 +36,8 @@ struct QuizView: View {
           categoryId: self.category.id
         ).results
         
+        print(self.questions)
+        
       } catch {
         print(error.localizedDescription)
       }

@@ -12,7 +12,7 @@ struct TriviaApp: App {
 
 // @DEDA
 // - [ ] TrivaDb.previewValue's
-// - [ ] formattedAnswer
+// - [x] formattedAnswer
 // - [x] preview value for quiz
 // - [x] preview value for quiz results
 // - [ ] remember to show logs in your presentation so you know the output...
