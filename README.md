@@ -12,9 +12,9 @@ We're building a trivia app for iOS using [SwiftUI](https://developer.apple.com/
 
 Key technologies and resources:
 
-> * [**SwiftUI**](https://developer.apple.com/xcode/swiftui/) – Apple’s modern, declarative UI framework for building iOS apps  
-> * [**Open Trivia Database**](https://opentdb.com) – A free, community-driven API with thousands of trivia questions  
-> * [**swift-opentdb**](https://github.com/kodydeda4/swift-opentdb) – An unofficial Swift package for fetching and decoding Open Trivia DB questions  
+* [**SwiftUI**](https://developer.apple.com/xcode/swiftui/) – Apple’s modern, declarative UI framework for building iOS apps  
+* [**Open Trivia Database**](https://opentdb.com) – A free, community-driven API with thousands of trivia questions  
+* [**swift-opentdb**](https://github.com/kodydeda4/swift-opentdb) – An unofficial Swift package for fetching and decoding Open Trivia DB questions  
 
 ## Table of Contents
 
