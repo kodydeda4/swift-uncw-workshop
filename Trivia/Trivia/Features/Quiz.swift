@@ -19,7 +19,7 @@ struct QuizView: View {
         }
       }
     }
-    .navigationTitle(self.category.formattedName)
+    .navigationTitle("\(self.category.emoji) \(self.category.formattedName)")
     .navigationBarTitleDisplayMode(.inline)
     .listStyle(.grouped)
     .sheet(isPresented: $sheet) {
