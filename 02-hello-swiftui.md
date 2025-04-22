@@ -142,3 +142,6 @@ struct ContentView: View {
 }
 ```
 
+## Finished!
+
+Keep going!

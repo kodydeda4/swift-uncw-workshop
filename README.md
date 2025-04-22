@@ -1,28 +1,24 @@
 # UNCW iOS Developer Workshop
 
 ![Header](./Image/header.png)
+@DEDA note to self, this images are 1312x848
 
 ## Overview
 
-> @DEDA note to self, this images are 1312x848
+Today we’re creating a trivia app for iOS, powered by [SwiftUI](https://developer.apple.com/xcode/swiftui/) and the [Open Trivia Database](https://opentdb.com). We’ll fetch trivia data in JSON format and use it to build our app.
 
-### What We're Building
-
-We're building a trivia app for iOS using [SwiftUI](https://developer.apple.com/xcode/swiftui/) and the [Open Trivia Database](https://opentdb.com). The app will fetch trivia questions in JSON format and present them in a fun, interactive quiz experience.
-
-Key technologies and resources:
-
-* [**SwiftUI**](https://developer.apple.com/xcode/swiftui/) – Apple’s modern, declarative UI framework for building iOS apps  
-* [**Open Trivia Database**](https://opentdb.com) – A free, community-driven API with thousands of trivia questions  
-* [**swift-opentdb**](https://github.com/kodydeda4/swift-opentdb) – An unofficial Swift package for fetching and decoding Open Trivia DB questions  
+* [SwiftUI](https://developer.apple.com/xcode/swiftui/) - Apple's declarative UI Framework  
+* [Open Trivia Database](https://opentdb.com) - a free, community-contributed collection of trivia questions.  
+* [swift-opentdb](https://github.com/kodydeda4/swift-opentdb) Unofficial OpenTriviaDatabase package for swift
 
 ## Table of Contents
 
 The workshop is broken down into a few essential lessons.
 
-- [1. Creating the Project](00-creating-the-project.md)
-- [2. Hello SwiftUI](01-hello-swiftui.md)
-- [3. Project Setup](02-project-setup.md)
+- [1. Creating the Project](01-creating-the-project.md)
+- [2. Hello SwiftUI](02-hello-swiftui.md)
+- [3. Project Setup](03-project-setup.md)
+- [4. Fetching Categories from the Api](04-fetching-categories-from-the-api.md)
 
 ## Learning Resources
 

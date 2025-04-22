@@ -8,3 +8,6 @@ Follow the steps below to create your first project. We are building an iOS app 
 ![alt](./Image/swift_4.png)
 ![alt](./Image/swift_5.png)
 
+# Finished!
+
+Keep going!
