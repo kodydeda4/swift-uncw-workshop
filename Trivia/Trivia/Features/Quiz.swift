@@ -1,5 +1,7 @@
 import SwiftUI
 import OpenTDB
+import SwiftPrettyPrint
+
 
 struct QuizView: View {
   let api = Trivia.shared
@@ -35,6 +37,10 @@ struct QuizView: View {
         self.questions = try await api.fetchQuestions(
           categoryId: self.category.id
         ).results
+        
+        Pretty.prettyPrint(self.category)
+        Pretty.prettyPrint(self.questions)
+        
       } catch {
         print(error.localizedDescription)
       }
