@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		33EBE0EE2DB7CCD200DC6C45 /* OpenTDB in Frameworks */ = {isa = PBXBuildFile; productRef = 33EBE0ED2DB7CCD200DC6C45 /* OpenTDB */; };
-		33EFCAC42DB7DF0E005FB43C /* SwiftPrettyPrint in Frameworks */ = {isa = PBXBuildFile; productRef = 33EFCAC32DB7DF0E005FB43C /* SwiftPrettyPrint */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +27,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33EFCAC42DB7DF0E005FB43C /* SwiftPrettyPrint in Frameworks */,
 				33EBE0EE2DB7CCD200DC6C45 /* OpenTDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,7 +71,6 @@
 			name = Trivia;
 			packageProductDependencies = (
 				33EBE0ED2DB7CCD200DC6C45 /* OpenTDB */,
-				33EFCAC32DB7DF0E005FB43C /* SwiftPrettyPrint */,
 			);
 			productName = Trivia;
 			productReference = 3379E4592DB745B6008DA949 /* Trivia.app */;
@@ -105,7 +102,6 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				33EBE0EC2DB7CCD200DC6C45 /* XCRemoteSwiftPackageReference "swift-opentdb" */,
-				33EFCAC22DB7DF0E005FB43C /* XCRemoteSwiftPackageReference "SwiftPrettyPrint" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3379E45A2DB745B6008DA949 /* Products */;
@@ -343,14 +339,6 @@
 				kind = branch;
 			};
 		};
-		33EFCAC22DB7DF0E005FB43C /* XCRemoteSwiftPackageReference "SwiftPrettyPrint" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/YusukeHosonuma/SwiftPrettyPrint";
-			requirement = {
-				kind = exactVersion;
-				version = 1.4.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -358,11 +346,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 33EBE0EC2DB7CCD200DC6C45 /* XCRemoteSwiftPackageReference "swift-opentdb" */;
 			productName = OpenTDB;
-		};
-		33EFCAC32DB7DF0E005FB43C /* SwiftPrettyPrint */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 33EFCAC22DB7DF0E005FB43C /* XCRemoteSwiftPackageReference "SwiftPrettyPrint" */;
-			productName = SwiftPrettyPrint;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
