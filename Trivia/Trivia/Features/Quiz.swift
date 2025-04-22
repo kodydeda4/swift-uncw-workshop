@@ -55,7 +55,7 @@ struct QuizView: View {
     ResultsSheet(
       questions: self.questions,
       answers: self.answers,
-      dismiss: {
+      finishButtonTapped: {
         self.sheet = false
         self.dismiss()
       }

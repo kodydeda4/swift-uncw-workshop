@@ -4,7 +4,7 @@ import OpenTDB
 struct ResultsSheet: View {
   let questions: [Trivia.Question]
   let answers: [Trivia.Question.ID: String]
-  var dismiss: () -> Void = {}
+  var finishButtonTapped: () -> Void = {}
 
   var correctAnswersCount: Int {
     var count = 0
@@ -40,7 +40,7 @@ struct ResultsSheet: View {
           .foregroundStyle(.secondary)
           
           Button {
-            self.dismiss()
+            self.finishButtonTapped()
           } label: {
             Text("Finish")
               .fontWeight(.semibold)
