@@ -12,6 +12,7 @@ extension OpenTDBClient {
 // - [ ] preview value for quiz
 // - [ ] preview value for quiz results
 // - [ ] remember to show logs in your presentation so you know the output...
+// - [ ] Git Readme similar to Cookable
 
 extension Trivia.Category {
   static var previewValue: Self {

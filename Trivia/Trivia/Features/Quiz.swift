@@ -11,13 +11,8 @@ struct QuizView: View {
   
   var body: some View {
     List {
-      ForEach(
-        Array(self.questions.enumerated()), id: \.element
-      ) { index, question in
-        Section(
-          header: Text("\(index+1). \(question.formattedQuestion)")
-            .textCase(.none)
-        ) {
+      ForEach(Array(self.questions.enumerated()), id: \.element) { index, question in
+        Section(header: sectionHeader(question, index)) {
           ForEach(question.answers, id: \.self) { answer in
             self.answerView(question, answer)
           }
@@ -28,10 +23,7 @@ struct QuizView: View {
     .navigationBarTitleDisplayMode(.inline)
     .listStyle(.grouped)
     .sheet(isPresented: $sheet) {
-      ResultsSheet {
-        self.sheet = false
-        self.dismiss()
-      }
+      self.resultsSheet()
     }
     .toolbar {
       Button("Finish") {
@@ -47,6 +39,24 @@ struct QuizView: View {
         print(error.localizedDescription)
       }
     }
+  }
+  
+  private func sectionHeader(
+    _ question: Trivia.Question,
+    _ index: Int
+  ) -> some View {
+    Text("\(index+1). \(question.formattedQuestion)").textCase(.none)
+  }
+  
+  private func resultsSheet() -> some View {
+    ResultsSheet(
+      questions: self.questions,
+      answers: self.answers,
+      dismiss: {
+        self.sheet = false
+        self.dismiss()
+      }
+    )
   }
   
   private func answerView(

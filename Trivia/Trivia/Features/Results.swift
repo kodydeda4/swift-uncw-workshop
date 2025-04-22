@@ -2,10 +2,10 @@ import SwiftUI
 import OpenTDB
 
 struct ResultsSheet: View {
-  var dismiss: () -> Void = {}
   let questions: [Trivia.Question]
   let answers: [Trivia.Question.ID: String]
-  
+  var dismiss: () -> Void = {}
+
   var correctAnswersCount: Int {
     var count = 0
     
