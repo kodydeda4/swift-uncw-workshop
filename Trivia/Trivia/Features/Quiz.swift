@@ -24,11 +24,17 @@ struct QuizView: View {
             } label: {
               HStack {
                 Text(answer)
+                Spacer()
                 
                 if answers[question.id] == answer {
                   Image(systemName: "checkmark")
                 }
               }
+              .foregroundColor(
+                answers[question.id] == answer
+                ? .accentColor
+                : .primary
+              )
             }
           }
         }
