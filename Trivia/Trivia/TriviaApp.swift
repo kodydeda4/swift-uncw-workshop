@@ -11,7 +11,7 @@ struct TriviaApp: App {
 }
 
 // @DEDA
-// - [ ] TrivaDb.previewValue's
+// - [x] TrivaDb.previewValue's
 // - [x] formattedAnswer
 // - [x] preview value for quiz
 // - [x] preview value for quiz results
