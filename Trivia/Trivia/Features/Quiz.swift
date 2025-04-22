@@ -51,7 +51,7 @@ struct QuizView: View {
     _ question: Trivia.Question,
     _ index: Int
   ) -> some View {
-    Text("\(index+1). \(question.formattedQuestion)").textCase(.none)
+    Text("\(index+1). \(question.question.stringByDecodingHTMLEntities)").textCase(.none)
   }
   
   private func resultsSheet() -> some View {
@@ -75,7 +75,7 @@ struct QuizView: View {
       answers[question.id] = answer
     } label: {
       HStack {
-        Text(answer)
+        Text(answer.stringByDecodingHTMLEntities)
         Spacer()
         if isSelected {
           Image(systemName: "checkmark")
