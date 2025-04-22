@@ -8,7 +8,7 @@ struct QuizView: View {
   @State var answers: [Trivia.Question.ID: String] = [:]
   @State var sheet = false
   @Environment(\.dismiss) var dismiss
-
+  
   var body: some View {
     List {
       ForEach(
@@ -19,23 +19,7 @@ struct QuizView: View {
             .textCase(.none)
         ) {
           ForEach(question.answers, id: \.self) { answer in
-            Button {
-              answers[question.id] = answer
-            } label: {
-              HStack {
-                Text(answer)
-                Spacer()
-                
-                if answers[question.id] == answer {
-                  Image(systemName: "checkmark")
-                }
-              }
-              .foregroundColor(
-                answers[question.id] == answer
-                ? .accentColor
-                : .primary
-              )
-            }
+            self.answerView(question, answer)
           }
         }
       }
@@ -62,6 +46,26 @@ struct QuizView: View {
       } catch {
         print(error.localizedDescription)
       }
+    }
+  }
+  
+  private func answerView(
+    _ question: Trivia.Question,
+    _ answer: String
+  ) -> some View {
+    let isSelected = answers[question.id] == answer
+    
+    return Button {
+      answers[question.id] = answer
+    } label: {
+      HStack {
+        Text(answer)
+        Spacer()
+        if isSelected {
+          Image(systemName: "checkmark")
+        }
+      }
+      .foregroundColor(isSelected ? .accentColor : .primary)
     }
   }
 }

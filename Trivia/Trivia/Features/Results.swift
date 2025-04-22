@@ -3,8 +3,8 @@ import OpenTDB
 
 struct ResultsSheet: View {
   var dismiss: () -> Void = {}
-  let questions: [Trivia.Question] = []
-  let answers: [Trivia.Question.ID: String] = [:]
+  let questions: [Trivia.Question]
+  let answers: [Trivia.Question.ID: String]
   
   var correctAnswersCount: Int {
     var count = 0
@@ -59,6 +59,9 @@ struct ResultsSheet: View {
 
 #Preview {
   Text("Hello World").sheet(isPresented: .constant(true)) {
-    ResultsSheet()
+    ResultsSheet(
+      questions: .previewValue,
+      answers: .previewValue
+    )
   }
 }

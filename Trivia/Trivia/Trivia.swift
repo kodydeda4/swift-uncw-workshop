@@ -9,7 +9,9 @@ extension OpenTDBClient {
 // @DEDA
 // - [ ] TrivaDb.previewValue's
 // - [ ] formattedAnswer
+// - [ ] preview value for quiz
 // - [ ] preview value for quiz results
+// - [ ] remember to show logs in your presentation so you know the output...
 
 extension Trivia.Category {
   static var previewValue: Self {
@@ -19,3 +21,20 @@ extension Trivia.Category {
     )
   }
 }
+
+extension Array where Element == Trivia.Question {
+  static var previewValue: Self {
+    return [
+      
+    ]
+  }
+}
+
+extension Dictionary where Key == Trivia.Question.ID, Value == String {
+  static var previewValue: Self {
+    return [
+      :
+    ]
+  }
+}
+
