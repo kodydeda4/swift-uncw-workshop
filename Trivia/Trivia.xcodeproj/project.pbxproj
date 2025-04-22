@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		33EBE0EE2DB7CCD200DC6C45 /* OpenTDB in Frameworks */ = {isa = PBXBuildFile; productRef = 33EBE0ED2DB7CCD200DC6C45 /* OpenTDB */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		3379E4592DB745B6008DA949 /* Trivia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trivia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33EBE0EE2DB7CCD200DC6C45 /* OpenTDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = Trivia;
 			packageProductDependencies = (
+				33EBE0ED2DB7CCD200DC6C45 /* OpenTDB */,
 			);
 			productName = Trivia;
 			productReference = 3379E4592DB745B6008DA949 /* Trivia.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = 3379E4502DB745B6008DA949;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				33EBE0EC2DB7CCD200DC6C45 /* XCRemoteSwiftPackageReference "swift-opentdb" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3379E45A2DB745B6008DA949 /* Products */;
 			projectDirPath = "";
@@ -320,6 +329,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		33EBE0EC2DB7CCD200DC6C45 /* XCRemoteSwiftPackageReference "swift-opentdb" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kodydeda4/swift-opentdb";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		33EBE0ED2DB7CCD200DC6C45 /* OpenTDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 33EBE0EC2DB7CCD200DC6C45 /* XCRemoteSwiftPackageReference "swift-opentdb" */;
+			productName = OpenTDB;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3379E4512DB745B6008DA949 /* Project object */;
 }

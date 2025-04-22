@@ -1,0 +1,15 @@
+{
+  "originHash" : "0689ecb2848c662c5b540db9c8854a9af060aa947223fad293b15c88c69b0f2f",
+  "pins" : [
+    {
+      "identity" : "swift-opentdb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kodydeda4/swift-opentdb",
+      "state" : {
+        "branch" : "main",
+        "revision" : "4e6506419f2f2eb4e9454cf4c8d0d977703a28eb"
+      }
+    }
+  ],
+  "version" : 3
+}
