@@ -1,82 +1,119 @@
-# 5. Fetching category trivia from the Api
+# 6. User Input for the Quiz
 
-Right now, we’re constructing the quiz destination directly inside the NavigationLink in AppView. But since we’ll eventually want to build out a more complex view for each trivia category, the best approach is to create a separate view called QuizView. This will give us a dedicated screen for the quiz and allow us to take advantage of SwiftUI previews to iterate more easily.
+Now that we've fetched the quiz questions, we need to display the possible answers and let the user select one.
 
-## 1. QuizView
+## Displaying the answers
 
-### Create the View
 
-Create a new view using `cmd+n` as we did before, name it `QuizView`.
+We create a `Section` for each quiz question and use `ForEach` to iterate over its possible answers.
 
-```swift
-import SwiftUI
+Inside each section, we display each answer as a `Text` row. Later, we can update these rows to be tappable and reflect the user's selection.
 
-struct QuizView: View {
-    var body: some View {
-        Text("Hello World")
-    }
-}
-```
+Finally, we can add `.listStyle(.grouped)` to the list to give a cleaner appearance.
 
-### Add the Category
-
-Add a constant for the `Trivia.Category` so we can pass it in.
 
 ```swift
-import SwiftUI
-import OpenTDB 
-
-struct QuizView: View {
-    let category: Trivia.Category
-    
-    var body: some View {
-        Text("Quiz for \(category.name)")
-    }
-}
-```
-
-### Fix SwiftUI Previews
-
-The file won't compile until you pass in a category into the SwiftUI preview. Luckily, the library ships with a preview value that you can use.
-
-```swift
-#Preview {
-    QuizView(category: Trivia.Category.previewValue)
-}
-```
-
-### Update NavigationLink
-
-Lastly, let's go back and update the link in the AppView to take us to the new page.
-
-```swift
-// AppView.swift
-
-NavigationLink(
-    destination: {
-        //Text("Quiz for \(category.name)")
-        QuizView(category: category)
-    },
-    label: {
-        HStack {
-            Text(category.name)
-            Text(category.emoji)
+List {
+    // 1. for each question, create a section. 
+    ForEach(self.questions) { question in
+        Section {
+            // 2. for each question answer, create a row.
+            ForEach(question.answers, id: \.self) { answer in
+                Text(answer)
+            }
+        } header: {
+            Text(question.question)
+                .textCase(.none)
         }
     }
-)
+}
 ```
 
-## 2. Fetching the Questions
+<img width=250 src="./swift_20.png">
 
-Just like in AppView, we’ll need access to the API singleton in QuizView to fetch data for the selected category. We’ll also define a @State property to store the fetched questions, use a List with a ForEach to display them, and attach a .task modifier to trigger the fetch when the view appears.
+## Handling User Input
 
-Additionally, we can set a navigation title for the view and apply the .inline display mode to keep it compact.
+To keep track of the user's selections, we'll store the answers in a dictionary where:
+- The **key** is the question ID
+- The **value** is the selected answer
 
-Finally, we’ll wrap the preview in a NavigationStack, since the actual app embeds AppView in a navigation stack—this helps keep the preview environment accurate.
+This structure makes it easy to update and access each user's choice as they progress through the quiz.
 
-Altogether, it looks like this:
+```swift
+@State var answers: [Trivia.Question.ID: String] = [:]
 
-<img width=250 src="./Image/swift_19.png">
+//  Example:
+//
+//  answers = [
+//    "What's the capital of Oklahoma?": "Oklahoma City"
+//    "What's the official bird of North Carolina?": "Cardinal"
+//  ]
+```
+
+Next, we’ll add a button around each answer to let the user select it. When tapped, the button will update our answers dictionary with the selected value.
+
+We can also display a checkmark image next to the selected answer to give clear visual feedback. Additionally, we can change the color of the button based on whether or not it’s selected, making the UI more intuitive and interactive.
+
+```swift
+ForEach(question.answers, id: \.self) { answer in
+    Button {
+        self.answers[question.id] = answer
+    } label: {
+        HStack {
+            Text(answer)
+            Spacer()
+            if self.answers[question.id] == answer {
+                Image(systemName: "checkmark")
+            }
+        }
+    }
+    .foregroundColor(
+        self.answers[question.id] == answer
+        ? .accentColor
+        : .primary
+    )
+}
+```
+
+<img width=250 src="./swift_21.png">
+
+
+## Improving Code Readability
+
+Finally, we can extract the answer row into a separate view or function to make the code easier to read and maintain. This helps keep the `List` body clean and improves reusability.
+
+```swift
+ForEach(question.answers, id: \.self) { answer in
+    self.answerView(question, answer)
+}
+```
+```swift
+private func answerView(
+    _ question: Trivia.Question,
+    _ answer: String
+) -> some View {
+    
+    // Declarative Code
+    let isSelected = self.answers[question.id] == answer
+    
+    return Button {
+        self.answers[question.id] = answer
+    } label: {
+        HStack {
+            Text(answer)
+            Spacer()
+            if isSelected {
+                Image(systemName: "checkmark")
+            }
+        }
+    }
+    .foregroundColor(isSelected ? .accentColor : .primary)
+}
+```
+
+## Finished!
+
+Now we can start working on the results page.
 
 ```swift
 import SwiftUI
@@ -86,15 +123,24 @@ struct QuizView: View {
     let api = Trivia.shared
     let category: Trivia.Category
     @State var questions: [Trivia.Question] = []
+    @State var answers: [Trivia.Question.ID: String] = [:]
     
     var body: some View {
         List {
             ForEach(self.questions) { question in
-                Text(question.question)
+                Section {
+                    ForEach(question.answers, id: \.self) { answer in
+                        self.answerView(question, answer)
+                    }
+                } header: {
+                    Text(question.question)
+                        .textCase(.none)
+                }
             }
         }
         .navigationTitle("\(category.emoji) \(category.name)")
         .navigationBarTitleDisplayMode(.inline)
+        .listStyle(.grouped)
         .task {
             do {
                 self.questions = try await self.api.fetchQuestions(categoryId: self.category.id).results
@@ -102,6 +148,26 @@ struct QuizView: View {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    private func answerView(
+        _ question: Trivia.Question,
+        _ answer: String
+    ) -> some View {
+        let isSelected = self.answers[question.id] == answer
+        
+        return Button {
+            self.answers[question.id] = answer
+        } label: {
+            HStack {
+                Text(answer)
+                Spacer()
+                if isSelected {
+                    Image(systemName: "checkmark")
+                }
+            }
+        }
+        .foregroundColor(isSelected ? .accentColor : .primary)
     }
 }
 
