@@ -44,6 +44,6 @@ https://github.com/kodydeda4/swift-opentdb
 ![Demo](./swift_12.png)
 ![Demo](./swift_13.png)
 
-## Finished!
+## 🎉 Finished!
 
 Now that we've had a basic introduction to SwiftUI, have our folder structure set up, and the dependencies loaded, we're ready to rock.

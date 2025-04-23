@@ -154,6 +154,6 @@ struct AppView: View {
 }
 ```
 
-## Finished!
+## 🎉 Finished!
 
 In the next section, we will start building the actual Quiz.

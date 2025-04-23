@@ -1,4 +1,4 @@
-# 2. Hello SwiftUI
+# 2. SwiftUI Introduction
 
 Now that we have the project set up, we can start building something. Let's build something small first to get our pallet ready. 
 
@@ -105,7 +105,7 @@ Image(systemName: "swift")
     }
 ```
 
-## Finished!
+## Finishing Touches
 
 With the product finished, you can now click on the image to switch colors back-and-forth. If you add the button view modifier `.buttonStyle(.plain)` it will clean up the animation a little bit.
 
@@ -142,6 +142,6 @@ struct ContentView: View {
 }
 ```
 
-## Finished!
+## 🎉 Finished!
 
 Keep going!

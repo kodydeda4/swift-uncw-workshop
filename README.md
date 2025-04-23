@@ -21,7 +21,9 @@ The workshop is broken down into a few essential lessons that you can use to fol
 - [3. Project Setup](./Documentation/03-project-setup.md)
 - [4. Fetching Categories from the Api](./Documentation/04-fetching-categories-from-the-api.md)
 - [5. Fetching Category Trivia from the Api](./Documentation/05-fetching-category-trivia-from-the-api.md)
-- [6. User Input for the Quiz](./Documentation/06-user-input-for-thequiz.md)
+- [6. User Input for the Quiz](06-user-input-for-thequiz.md)
+- [7. Results for the Quiz](07-quiz-results.md)
+- [8. Additional Styling](08-additional-styling.md)
 
 ## Learning Resources
 

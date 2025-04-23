@@ -76,7 +76,7 @@ Finally, we’ll wrap the preview in a NavigationStack, since the actual app emb
 
 Altogether, it looks like this:
 
-<img width=250 src="./Image/swift_19.png">
+<img width=250 src="./swift_19.png">
 
 ```swift
 import SwiftUI
@@ -111,3 +111,7 @@ struct QuizView: View {
     }
 }
 ```
+
+## 🎉 Finished!## Finished!
+
+In the next section, we will start building the user interaction for the quiz.

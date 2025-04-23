@@ -77,7 +77,6 @@ ForEach(question.answers, id: \.self) { answer in
 
 <img width=250 src="./swift_21.png">
 
-
 ## Improving Code Readability
 
 Finally, we can extract the answer row into a separate view or function to make the code easier to read and maintain. This helps keep the `List` body clean and improves reusability.
@@ -111,69 +110,6 @@ private func answerView(
 }
 ```
 
-## Finished!
+### 🎉 Finished!
 
-Now we can start working on the results page.
-
-```swift
-import SwiftUI
-import OpenTDB
-
-struct QuizView: View {
-    let api = Trivia.shared
-    let category: Trivia.Category
-    @State var questions: [Trivia.Question] = []
-    @State var answers: [Trivia.Question.ID: String] = [:]
-    
-    var body: some View {
-        List {
-            ForEach(self.questions) { question in
-                Section {
-                    ForEach(question.answers, id: \.self) { answer in
-                        self.answerView(question, answer)
-                    }
-                } header: {
-                    Text(question.question)
-                        .textCase(.none)
-                }
-            }
-        }
-        .navigationTitle("\(category.emoji) \(category.name)")
-        .navigationBarTitleDisplayMode(.inline)
-        .listStyle(.grouped)
-        .task {
-            do {
-                self.questions = try await self.api.fetchQuestions(categoryId: self.category.id).results
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    private func answerView(
-        _ question: Trivia.Question,
-        _ answer: String
-    ) -> some View {
-        let isSelected = self.answers[question.id] == answer
-        
-        return Button {
-            self.answers[question.id] = answer
-        } label: {
-            HStack {
-                Text(answer)
-                Spacer()
-                if isSelected {
-                    Image(systemName: "checkmark")
-                }
-            }
-        }
-        .foregroundColor(isSelected ? .accentColor : .primary)
-    }
-}
-
-#Preview {
-    NavigationStack {
-        QuizView(category: Trivia.Category.previewValue)
-    }
-}
-```
+In the next section, we will start building the results page.
