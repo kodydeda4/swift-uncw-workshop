@@ -19,6 +19,7 @@ The workshop is broken down into a few essential lessons.
 - [2. Hello SwiftUI](02-hello-swiftui.md)
 - [3. Project Setup](03-project-setup.md)
 - [4. Fetching Categories from the Api](04-fetching-categories-from-the-api.md)
+- [5. Fetching Category Trivia from the Api](04-fetching-categories-from-the-api.md)
 
 ## Learning Resources
 
