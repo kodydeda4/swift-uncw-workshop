@@ -2,89 +2,77 @@ import SwiftUI
 import OpenTDB
 
 struct QuizView: View {
-  let api = Trivia.shared
-  let category: Trivia.Category
-  @State var questions: [Trivia.Question] = []
-  @State var answers: [Trivia.Question.ID: String] = [:]
-  @State var sheet = false
-  @Environment(\.dismiss) var dismiss
-  
-  var body: some View {
-    List {
-      ForEach(Array(self.questions.enumerated()), id: \.element) { index, question in
-        Section(header: sectionHeader(question, index)) {
-          ForEach(question.answers, id: \.self) { answer in
-            self.answerView(question, answer)
-          }
-        }
-      }
-    }
-    .navigationTitle("\(self.category.emoji) \(self.category.formattedName)")
-    .navigationBarTitleDisplayMode(.inline)
-    .listStyle(.grouped)
-    .sheet(isPresented: $sheet) {
-      self.resultsSheet()
-    }
-    .toolbar {
-      Button("Finish") {
-        self.sheet = true
-      }
-    }
-    .task {
-      do {
-        self.questions = try await api.fetchQuestions(
-          categoryId: self.category.id
-        ).results
-        
-        print(self.questions)
-        
-      } catch {
-        print(error.localizedDescription)
-      }
-    }
-  }
-  
-  private func sectionHeader(
-    _ question: Trivia.Question,
-    _ index: Int
-  ) -> some View {
-    Text("\(index+1). \(question.question.stringByDecodingHTMLEntities)").textCase(.none)
-  }
-  
-  private func resultsSheet() -> some View {
-    ResultsSheet(
-      questions: self.questions,
-      answers: self.answers,
-      finishButtonTapped: {
-        self.sheet = false
-        self.dismiss()
-      }
-    )
-  }
-  
-  private func answerView(
-    _ question: Trivia.Question,
-    _ answer: String
-  ) -> some View {
-    let isSelected = answers[question.id] == answer
+    let api = Trivia.shared
+    let category: Trivia.Category
+    @State var questions: [Trivia.Question] = []
+    @State var answers: [Trivia.Question.ID: String] = [:]
+    @State var sheet = false
+    @Environment(\.dismiss) var dismiss
     
-    return Button {
-      answers[question.id] = answer
-    } label: {
-      HStack {
-        Text(answer.stringByDecodingHTMLEntities)
-        Spacer()
-        if isSelected {
-          Image(systemName: "checkmark")
+    var body: some View {
+        List {
+            ForEach(self.questions) { question in
+                Section {
+                    ForEach(question.answers, id: \.self) { answer in
+                        self.answerView(question, answer)
+                    }
+                } header: {
+                    Text(question.question)
+                        .textCase(.none)
+                }
+            }
         }
-      }
-      .foregroundColor(isSelected ? .accentColor : .primary)
+        .navigationTitle("\(category.emoji) \(category.name)")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            Button("Finish") {
+                self.sheet = true
+            }
+        }
+        .sheet(isPresented: $sheet) {
+            ResultsSheet(
+                questions: self.questions,
+                answers: self.answers,
+                finishButtonTapped: {
+                    self.sheet = false
+                    self.dismiss()
+                }
+            )
+        }
+        .listStyle(.grouped)
+        .task {
+            do {
+                self.questions = try await self.api.fetchQuestions(categoryId: self.category.id).results
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
-  }
+    
+    private func answerView(
+        _ question: Trivia.Question,
+        _ answer: String
+    ) -> some View {
+        let isSelected = self.answers[question.id] == answer
+        
+        return Button {
+            self.answers[question.id] = answer
+        } label: {
+            HStack {
+                Text(answer)
+                Spacer()
+                if isSelected {
+                    Image(systemName: "checkmark")
+                }
+            }
+        }
+        .foregroundColor(isSelected ? .accentColor : .primary)
+    }
 }
 
 #Preview {
-  NavigationStack {
-    QuizView(category: .previewValue)
-  }
+    NavigationStack {
+        QuizView(category: Trivia.Category.previewValue)
+    }
 }
+

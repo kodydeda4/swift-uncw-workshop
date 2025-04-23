@@ -1,15 +1,17 @@
 import SwiftUI
 import OpenTDB
 
-typealias Trivia = OpenTDBClient
-extension Trivia { static var shared = Trivia.previewValue }
-
 @main
 struct TriviaApp: App {
-  var body: some Scene {
-    WindowGroup {
-      AppView()
+    var body: some Scene {
+        WindowGroup {
+            AppView()
+        }
     }
-  }
 }
 
+extension OpenTDBClient {
+    static var shared = OpenTDBClient.liveValue
+}
+
+typealias Trivia = OpenTDBClient
