@@ -1,6 +1,6 @@
 # UNCW iOS Developer Workshop
 
-![Header](./Image/header.png)
+![Header](./Documentation/header.png)
 
 ## Overview
 
@@ -16,12 +16,12 @@ This workshop is going to use the following tools:
 
 The workshop is broken down into a few essential lessons that you can use to follow along if you missed anything.
 
-- [1. Creating the Project](01-creating-the-project.md)
-- [2. SwiftUI Introduction](02-hello-swiftui.md)
-- [3. Project Setup](03-project-setup.md)
-- [4. Fetching Categories from the Api](04-fetching-categories-from-the-api.md)
-- [5. Fetching Category Trivia from the Api](05-fetching-category-trivia-from-the-api.md)
-- [6. User Input for the Quiz](06-user-input-for-thequiz.md)
+- [1. Creating the Project](./Documentation/01-creating-the-project.md)
+- [2. SwiftUI Introduction](./Documentation/02-hello-swiftui.md)
+- [3. Project Setup](./Documentation/03-project-setup.md)
+- [4. Fetching Categories from the Api](./Documentation/04-fetching-categories-from-the-api.md)
+- [5. Fetching Category Trivia from the Api](./Documentation/05-fetching-category-trivia-from-the-api.md)
+- [6. User Input for the Quiz](./Documentation/06-user-input-for-thequiz.md)
 
 ## Learning Resources
 
@@ -34,4 +34,4 @@ Enjoyed the workshop? Here’s where you can learn even more about iOS Developme
 - [PointFree.co](https://www.pointfree.co/)
 - [Reddit & Discord Communities](https://www.reddit.com/r/SwiftUI/)
 
-![Footer](./Image/footer.png)
+![Footer](./Documentation/footer.png)

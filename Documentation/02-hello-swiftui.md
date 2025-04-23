@@ -2,19 +2,19 @@
 
 Now that we have the project set up, we can start building something. Let's build something small first to get our pallet ready. 
 
-![alt](./Image/swift_5.png)
+![alt](./swift_5.png)
 
 ## SF Symbols
 
 We can use [SF Symbols](https://developer.apple.com/sf-symbols/) to find a bunch of icons for us to use in our app. All of these icons integrate beautifully with SwiftUI.
 
-![alt](./Image/sf-symbols.png)
+![alt](./sf-symbols.png)
 
 ## Styling the View
 
 We can use a variety of SwiftUI [view modifiers](https://developer.apple.com/documentation/swiftui/viewmodifier) to style our image containing the swift SF symbol icon.
 
-![alt](./Image/swift_6.png)
+![alt](./swift_6.png)
 
 ```swift
 Image(systemName: "swift")
@@ -109,7 +109,7 @@ Image(systemName: "swift")
 
 With the product finished, you can now click on the image to switch colors back-and-forth. If you add the button view modifier `.buttonStyle(.plain)` it will clean up the animation a little bit.
 
-![Demo](./Image/button-demo.gif)
+![Demo](./button-demo.gif)
 
 ```swift
 struct ContentView: View {

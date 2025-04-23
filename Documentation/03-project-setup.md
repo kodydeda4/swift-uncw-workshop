@@ -7,7 +7,7 @@ Now that we're done with a little demo, we can  start setting up the file struct
 1. Create a new file with `cmd+n`. 
 2. Name it `AppView.swift`.
 
-![Demo](./Image/swift_8.png)
+![Demo](./swift_8.png)
 
 ## 2. TriviaApp
 
@@ -30,7 +30,7 @@ struct TriviaApp: App {
 
 Create a folder called Features, and place the app for you in there.
 
-![Demo](./Image/swift_10.png)
+![Demo](./swift_10.png)
 
 ## 4. swift-opentdb
 
@@ -40,9 +40,9 @@ Finally, import the [swift-opentdb](https://github.com/kodydeda4/swift-opentdb) 
 https://github.com/kodydeda4/swift-opentdb
 ```
 
-![Demo](./Image/swift_11.png)
-![Demo](./Image/swift_12.png)
-![Demo](./Image/swift_13.png)
+![Demo](./swift_11.png)
+![Demo](./swift_12.png)
+![Demo](./swift_13.png)
 
 ## Finished!
 

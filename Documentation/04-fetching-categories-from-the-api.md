@@ -2,7 +2,7 @@
 
 The first feature that we need for our app is the ability to fetch a list of categories from the open trivia API. 
 
-![Demo](./Image/swift_14.png)
+![Demo](./swift_14.png)
 
 ## 1. Importing OpenTDB
 
@@ -76,7 +76,7 @@ struct AppView: View {
 
 Now that we've actually received the values, we can put them into a `List` view, and interate over them with a `ForEach` view.
 
-![Demo](./Image/swift_15.png)
+![Demo](./swift_15.png)
 
 ```swift
 struct AppView: View {
@@ -100,7 +100,7 @@ struct AppView: View {
 
 Let's use an `HStack` to wrap the categories name and emoji.
 
-![Demo](./Image/swift_16.png)
+![Demo](./swift_16.png)
 
 ```swift
 ForEach(self.categories) { category in
@@ -120,7 +120,7 @@ Let's add support for navigation to the quiz view for each category. To do this 
 
 Let's wrap our List view in the NavigationStack, wrap our category views in NavigationLinks, and add a navigationTitle to the List.
 
-![Demo](./Image/NavigationStack.gif)
+![Demo](./NavigationStack.gif)
 
 ```swift
 struct AppView: View {
