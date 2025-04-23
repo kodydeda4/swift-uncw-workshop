@@ -1,17 +1,17 @@
-//
-//  TriviaApp.swift
-//  Trivia
-//
-//  Created by Kody Deda on 4/21/25.
-//
-
 import SwiftUI
+import OpenTDB
 
 @main
 struct TriviaApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppView()
         }
     }
 }
+
+extension OpenTDBClient {
+    static var shared = OpenTDBClient.liveValue
+}
+
+typealias Trivia = OpenTDBClient

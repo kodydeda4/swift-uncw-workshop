@@ -1,24 +1,37 @@
-//
-//  ContentView.swift
-//  Trivia
-//
-//  Created by Kody Deda on 4/21/25.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @State var buttonTapped = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        Button {
+            self.buttonTapped.toggle()
+        } label: {
+            Image(systemName: "swift")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 250, height: 250)
+                .foregroundColor(buttonTapped ? .black : .white)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background {
+                    LinearGradient(
+                        colors: buttonTapped
+                        ? [.blue, .purple]
+                        : [.orange, .red]
+                        ,
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .ignoresSafeArea()
+                }
         }
-        .padding()
+        .buttonStyle(.plain)
     }
 }
+
+
 
 #Preview {
     ContentView()
 }
+
