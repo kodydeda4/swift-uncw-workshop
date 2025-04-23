@@ -1,155 +1,116 @@
-# 4. Fetching categories from the Api
+# 5. Fetching category trivia from the Api
 
-The first feature that we need for our app is the ability to fetch a list of categories from the open trivia API. 
+Right now, we’re constructing the quiz destination directly inside the NavigationLink in AppView. But since we’ll eventually want to build out a more complex view for each trivia category, the best approach is to create a separate view called QuizView. This will give us a dedicated screen for the quiz and allow us to take advantage of SwiftUI previews to iterate more easily.
 
-![Demo](./Image/swift_14.png)
+## 1. QuizView
 
-## 1. Importing OpenTDB
+### Create the View
 
-Let's start by importing OpenTDB. This is how we will get access to all of the functions and classes within this package.
+Create a new view using `cmd+n` as we did before, name it `QuizView`.
+
+```swift
+import SwiftUI
+
+struct QuizView: View {
+    var body: some View {
+        Text("Hello World")
+    }
+}
+```
+
+### Add the Category
+
+Add a constant for the `Trivia.Category` so we can pass it in.
+
+```swift
+import SwiftUI
+import OpenTDB 
+
+struct QuizView: View {
+    let category: Trivia.Category
+    
+    var body: some View {
+        Text("Quiz for \(category.name)")
+    }
+}
+```
+
+### Fix SwiftUI Previews
+
+The file won't compile until you pass in a category into the SwiftUI preview. Luckily, the library ships with a preview value that you can use.
+
+```swift
+#Preview {
+    QuizView(category: Trivia.Category.previewValue)
+}
+```
+
+### Update NavigationLink
+
+Lastly, let's go back and update the link in the AppView to take us to the new page.
+
+```swift
+// AppView.swift
+
+NavigationLink(
+    destination: {
+        //Text("Quiz for \(category.name)")
+        QuizView(category: category)
+    },
+    label: {
+        HStack {
+            Text(category.name)
+            Text(category.emoji)
+        }
+    }
+)
+```
+
+## 2. Fetching the Questions
+
+Just like in AppView, we’ll need access to the API singleton in QuizView to fetch data for the selected category. We’ll also define a @State property to store the fetched questions, use a List with a ForEach to display them, and attach a .task modifier to trigger the fetch when the view appears.
+
+Additionally, we can set a navigation title for the view and apply the .inline display mode to keep it compact.
+
+Finally, we’ll wrap the preview in a NavigationStack, since the actual app embeds AppView in a navigation stack—this helps keep the preview environment accurate.
+
+Altogether, it looks like this:
+
+<img width=250 src="./Image/swift_19.png">
 
 ```swift
 import SwiftUI
 import OpenTDB
-```
 
-## 2. Creating the Singleton
-
-The actual object that fetches data is called `OpenTDBClient`. Let's create a static shared value so that it can be used throughout the app. 
-
-```swift
-extension OpenTDBClient {
-    static var shared = OpenTDBClient.previewValue
-}
-```
-
-We can also add a type alias to make it easier to read throughout the app.
-
-```swift
-typealias Trivia = OpenTDBClient
-
-extension Trivia {
-    static var shared = OpenTDBClient.previewValue
-}
-```
-
-## 3. Setting up the AppView
-
-Now that we have a shared static value, we can add the api property to our app view, and a state property to track changes to the categories we're trying to fetch from the api.
-
-```swift
-struct AppView: View {
+struct QuizView: View {
     let api = Trivia.shared
-    @State var categories: [Trivia.Category] = []
-    
-    var body: some View {
-        Text(...)
-    }
-}
-```
-
-## 4. Fetching data from the Api
-
-The `.task` modifier allow us to perform some asynchronous logic before the view appears. In this case fetching the categories from the API. If the function does not throw an error, we will update our state when it completes.
-
-```swift
-struct AppView: View {
-    let api = OpenTDBClient.shared
-    @State var categories: [OpenTDBClient.Category] = []
-    
-    var body: some View {
-        Text(...)
-            .task {
-                do {
-                    self.categories = try await self.api
-                      .fetchAllCategories()
-                      .triviaCategories
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-    }
-}
-```
-
-## 5. Presenting the data in a list
-
-Now that we've actually received the values, we can put them into a `List` view, and interate over them with a `ForEach` view.
-
-![Demo](./Image/swift_15.png)
-
-```swift
-struct AppView: View {
-    let api = OpenTDBClient.shared
-    @State var categories: [OpenTDBClient.Category] = []
+    let category: Trivia.Category
+    @State var questions: [Trivia.Question] = []
     
     var body: some View {
         List {
-            ForEach(self.categories) { category in
-                Text(category.name)
+            ForEach(self.questions) { question in
+                Text(question.question)
             }
         }
-        .task { ... }
-    }
-}
-```
-
-## 6. ForEach Explained
-
-`ForEach` View allows us to construct a unique view for each element in the collection, provided that element. 
-
-Let's use an `HStack` to wrap the categories name and emoji.
-
-![Demo](./Image/swift_16.png)
-
-```swift
-ForEach(self.categories) { category in
-    HStack {
-        Text(category.name)
-        Text(category.emoji)
-    }
-}
-```
-
-## 7. Navigating to the Quiz View
-
-Let's add support for navigation to the quiz view for each category. To do this we need:
-1. `NavigationStack` - A view that displays a root view and enables you to present additional views over the root view.
-2. `NavigationLink` - A view that controls a navigation presentation.
-3. `.navigationTitle` - A view modifier that configures the view’s title for purposes of navigation.
-
-Let's wrap our List view in the NavigationStack, wrap our category views in NavigationLinks, and add a navigationTitle to the List.
-
-![Demo](./Image/NavigationStack.gif)
-
-```swift
-struct AppView: View {
-    let api = OpenTDBClient.shared
-    @State var categories: [OpenTDBClient.Category] = []
-    
-    var body: some View {
-       // 1. NavigationStack
-        NavigationStack {
-            List {
-                ForEach(self.categories) { category in
-                    // 2. NavigationLink
-                    NavigationLink(
-                        destination: {
-                            Text("Quiz for \(category.name)")
-                        },
-                        label: {
-                            HStack {
-                                Text(category.name)
-                                Text(category.emoji)
-                            }
-                        }
-                    )
-                }
+        .navigationTitle("\(category.emoji) \(category.name)")
+        .navigationBarTitleDisplayMode(.inline)
+        .task {
+            do {
+                self.questions = try await self.api.fetchQuestions(categoryId: self.category.id).results
+            } catch {
+                print(error.localizedDescription)
             }
-            // 3. navigationTitle
-            .navigationTitle("Trivia")
-            .task { ... }
         }
     }
 }
+
+#Preview {
+    NavigationStack {
+        QuizView(category: Trivia.Category.previewValue)
+    }
+}
 ```
+
+## 3. User Input
+

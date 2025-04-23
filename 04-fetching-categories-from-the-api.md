@@ -54,8 +54,8 @@ The `.task` modifier allow us to perform some asynchronous logic before the view
 
 ```swift
 struct AppView: View {
-    let api = OpenTDBClient.shared
-    @State var categories: [OpenTDBClient.Category] = []
+    let api = Trivia.shared
+    @State var categories: [Trivia.Category] = []
     
     var body: some View {
         Text(...)
@@ -80,8 +80,8 @@ Now that we've actually received the values, we can put them into a `List` view,
 
 ```swift
 struct AppView: View {
-    let api = OpenTDBClient.shared
-    @State var categories: [OpenTDBClient.Category] = []
+    let api = Trivia.shared
+    @State var categories: [Trivia.Category] = []
     
     var body: some View {
         List {
@@ -124,8 +124,8 @@ Let's wrap our List view in the NavigationStack, wrap our category views in Navi
 
 ```swift
 struct AppView: View {
-    let api = OpenTDBClient.shared
-    @State var categories: [OpenTDBClient.Category] = []
+    let api = Trivia.shared
+    @State var categories: [Trivia.Category] = []
     
     var body: some View {
        // 1. NavigationStack
@@ -153,3 +153,7 @@ struct AppView: View {
     }
 }
 ```
+
+## Finished!
+
+In the next section, we will start building the actual Quiz.
